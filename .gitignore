@@ -1,0 +1,6 @@
+# Ignorar binarios y carpetas de compilación
+bin/
+obj/
+*.o
+*.out
+shitfetch
