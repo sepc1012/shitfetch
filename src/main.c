@@ -23,20 +23,36 @@ void get_distro(char *dest, size_t size) {
     fclose(fp);
 }
 
+void print_logo(const char *distro){
+    FILE *fp = NULL;
+
+    if (strstr(distro, "Arch") !=  NULL){
+        fp = fopen("src/logos/ascii/arch.txt","r");
+
+    }else{
+        fp= fopen("src/logos/ascii/default.txt","r");
+    }
+    
+    if( fp == NULL){
+        printf("    [!] Logo not found");
+        return;
+
+    }
+
+    char line[256];
+    while (fgets(line, sizeof(line), fp)){
+        printf("%s", line);
+    } 
+    fclose(fp);
+}
+
 int main(void) {
     char distro[64];
     get_distro(distro, sizeof(distro));
 
     printf("\n");
-    printf("       ___          OS: %s\n", distro);
-    printf("      / | \\         \n");
-    printf("     |  |  |         \n");
-    printf("     |  |  |         \n");
-    printf("     |  |  |         \n");
-    printf("   __|  |  |__       \n");
-    printf(" /   \\     /   \\     \n");
-    printf("|     |   |     |    \n");
-    printf(" \\___/\\___/\\___/     \n");
+    print_logo(distro);
+    printf("OS: %s\n", distro);
     printf("\n");
 
     return 0;
